@@ -1,0 +1,17 @@
+name: Supabase Keep-Alive
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'  # Todos los lunes a las 12:00 UTC
+  workflow_dispatch:       # También ejecutable a mano desde GitHub
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" \
+            "https://fzjfqrtdhwdzlwbfvktz.supabase.co/rest/v1/trials_comprobar?select=count&limit=1" \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6amZxcnRkaHdkemx3YmZ2a3R6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3MzU2MTAsImV4cCI6MjA5MjMxMTYxMH0.cKwK2Tt7uBuGKUtjRUP2ijbh3hh9XQWst6Qfs1BIss8" \
+            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6amZxcnRkaHdkemx3YmZ2a3R6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3MzU2MTAsImV4cCI6MjA5MjMxMTYxMH0.cKwK2Tt7uBuGKUtjRUP2ijbh3hh9XQWst6Qfs1BIss8"
